@@ -1,3 +1,42 @@
+Rel. 4.4.4 2001/09/15
+-------------------------------------------------------------------------
+	
+2001-09-15  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/geocent.c: I have modified the Convert_Geodetic_To_Geocentric() 
+	function to clamp Latitudes just a little out of the range
+	-PI/2 to PI/2 and to no longer do error checks on Longitudes since
+	they will be auto-wrapped by sin() and cos(). 
+
+	See http://bugzilla.remotesensing.org/show_bug.cgi?id=17
+
+	* nad/epsg: commited new updates with fixed units for us state plane
+	zones in feet, as reported by Marc-Andre.
+
+2001-08-23  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/makefile.vc: improved the setting of PROJ_LIB defaults.
+
+	* src/pj_open_lib.c: added the pj_set_finder() entry point.
+
+	* nad/epsg: fixed all LCC projections.  The parameters were badly
+	mixed up.
+
+2001-08-11  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/proj.c: Generate an error message if +proj=latlong is used with
+	this program.  As per bugzilla bug 70. 
+
+2001-06-01  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* makefile.vc: emess.c directly linked into mainline programs.
+
+	* pj_errno.c: added pj_get_errno_ref().
+
+2001-05-14  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* upraded config.sub and config.guess as per debian bug report 97374.
+
 Rel. 4.4.3 2001/04/20
 -------------------------------------------------------------------------
 	
