@@ -11,5 +11,5 @@
 #define PACKAGE "proj"
 
 /* Version number of package */
-#define VERSION "4.4.4"
+#define VERSION "4.4.5"
 
