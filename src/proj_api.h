@@ -1,5 +1,5 @@
 /******************************************************************************
- * $Id: proj_api.h,v 1.5 2002/01/09 14:36:22 warmerda Exp $
+ * $Id: proj_api.h,v 1.7 2002/12/14 20:14:35 warmerda Exp $
  *
  * Project:  PROJ.4
  * Purpose:  Public (application) include file for PROJ.4 API, and constants.
@@ -28,6 +28,12 @@
  ******************************************************************************
  *
  * $Log: proj_api.h,v $
+ * Revision 1.7  2002/12/14 20:14:35  warmerda
+ * added geocentric support
+ *
+ * Revision 1.6  2002/06/11 18:08:25  warmerda
+ * Added the pj_get_def() function
+ *
  * Revision 1.5  2002/01/09 14:36:22  warmerda
  * updated to 4.4.5
  *
@@ -58,7 +64,7 @@ extern "C" {
 #endif
 
 /* Try to update this every version! */
-#define PJ_VERSION 445
+#define PJ_VERSION 446
 
 extern char const pj_release[]; /* global release id string */
 
@@ -100,11 +106,13 @@ int pj_apply_gridshift( const char *, int,
                         double *x, double *y, double *z );
 void pj_deallocate_grids();
 int pj_is_latlong(projPJ);
+int pj_is_geocent(projPJ);
 void pj_pr_list(projPJ);
 void pj_free(projPJ);
 void pj_set_finder( const char *(*)(const char *) );
 projPJ pj_init(int, char **);
 projPJ pj_init_plus(const char *);
+char *pj_get_def(projPJ, int);
 projPJ pj_latlong_from_proj( projPJ );
 void *pj_malloc(size_t);
 void pj_dalloc(void *);

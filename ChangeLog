@@ -1,3 +1,107 @@
+2003-03-03  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Prepare 4.4.6 Release.
+
+	* nad/epsg: updated to EPSG 6.2.2.
+
+	* src/Makefile.am, nad/Makefile.am: a few fixes for Cygwin 
+	compatibility, ensure /usr/local/share/proj get pre-created.
+
+	* Incorporate src/PJ_lcca.c, the new "alternate" LCC implementation
+	provided by Gerald for some old maps.  See his site for details.
+
+	* Rebuild dependent files with automake 1.6.3, libtool 1.4.2 and 
+	autoconf 2.53.  
+
+2003-01-15  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/pj_datums.c: added some datums as suggested by the GRASS team.
+
+2002-12-14  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/projects.h, various others: updated header style in some files.
+
+	* src/pj_geocent.c, src/pj_transform.c, src/pj_list.h, src/projects.h:
+	added support for geocentric coordinates in pj_transform() api.
+
+	* src/pj_utils.c: Fixed pj_get_def() to return info on prime meridian.
+
+2002-12-08  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/cs2cs.c: added support for the -lm switch to report all
+	prime meridians.
+
+	* src/pj_init.c, pj_transform.c, pj_datum.c: added preliminary
+	support for the +pm switch to set the prime meridian.
+
+2002-12-01  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/pj_transform.c: Applied fix for 7 parameter shifts in 
+	pj_geocentric_from_wgs84() as per suggestion from Harald Lernbeiss in:
+
+	http://bugzilla.remotesensing.org/show_bug.cgi?id=194
+
+2002-11-19  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/cs2cs.c: cleanup memory at end to facility memory leak testing.
+
+2002-07-29  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* nad/esri: applied gradian related patches as per bug 184:
+
+	   http://bugzilla.remotesensing.org/show_bug.cgi?id=184
+
+2002-07-25  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* nad/esri: added new ESRI translation file.  Includes EPSG values
+	plus various ESRI extensions. 
+
+2002-07-07  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/*.c, src/*.h, src/makefile.vc: *Many* changes to support
+	compiling all of the PROJ.4 source as C++ source.  Add /TP to CFLAGS
+	in makefile.vc to test this on Windows.  projects.h, and proj_api.h 
+	attempt to export all externally visible functions with C linkage but
+	all code should now compile as C++.  Currently only tested with VC++ 6.
+
+2002-06-11  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/pj_pr_list.c, proj.def, proj_api.h: Added the pj_get_def()
+	function to return an expanded definition from a projPJ handle, 
+	including having the +init= section expanded.
+
+2002-05-30  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/geod/{geod.c,geod_for.c,geod_inv.c,geod_set.c,geodesic.h}:
+	Renamed a, S and f to geod_a, geod_S and geod_f to slightly reduce
+	the horrible naming conflict situations with geodesic.h. 
+	   http://bugzilla.remotesensing.org/show_bug.cgi?id=148
+
+2002-04-30  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* html/faq.html: new
+
+	* src/pj_apply_gridshift.c,pj_open_lib.c,nad_init.c: try to improve
+	debug output when datum shifting fails.
+
+2002-04-16  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/pj_list.c,src/PJ_krovak.c: Incorporated support for Krovak
+	projection as per submission by Thomas Fleming and Markus Neteler.
+
+2002-03-01  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/geod.c: Moved ctype.h up to avoid compile failure on MacOS X.
+
+2002-02-15  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* pj_transform.c: Provide zerod Z array in pj_datum_transform() if
+	none passed in.
+
+2002-01-23  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Added proj.spec file provided by Intevation (FreeGIS CD).
+
 Rel. 4.4.5 2002/01/09
 -------------------------------------------------------------------------
 	
