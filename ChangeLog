@@ -1,4 +1,62 @@
+2000-09-22  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Fixed src/Makefile.am install-exec-local target, and added
+	geocent.h, and emess.h.  Reissued 4.4.2 distribution files.
+
+	* Update version to 4.4.2, in preparation for 4.4.2 release.
+
+	* Ensure makefile.vc is distributed, and mention windows building
+	in README.
+
+	* Cast args to freev2() in bch2bps.c, and mk_cheby.c to avoid errors
+	on the Cray.
+
+2000-09-21  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Added "sphere" to pj_ellps.c. 
+
+2000-07-06  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Fixed bug in nad_init() with path for datum shifting files.
+
+	* Implemented cs2cs program for transforming between coordinate systems
+	including datum shifts.
+
+	* Implemented proj=latlong pseudo-projection.
+
+	* Implemented pj_transform() to transform from one coordinate system
+	to another, including applying geocentric datum shifts, and NAD27
+	grid shifts.
+
+	* Implemented 3/7 parameter geocentric datum shift support.
+
+	* Added support for +datum, +towgs84, and +nadgrids parameters
+	when defining PJ's (for pj_init()).  Added datum_type, and datum_params
+	to PJ structure.
+
+2000-07-04  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Patched proj.c to handle binary io properly on Windows and DOS.
+	Patch submitted by Thomas Knudsen <thk@kms.dk>.
+
+2000-04-26  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Added #define USE_PROJUV to projects.h to allow apps to
+	work properly against old and new version.
+
+2000-04-04  Frank Warmerdam  <warmerda@rommel.atlsci.com>
+
+	* Patch from Craig Bruce (cbruce@cubewerx.com) for PJ_ortho.c
+	to make INVERSE() work well for points near zero.
+
+2000-03-29  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Added hard links for invproj->proj and invgeod->geod in 
+	src/Makefile.{am,in}.
+
 2000-03-27  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Issued V4.4.1 Release.
 
 	* Re-added install target for NADCON data files when available.
 
@@ -16,6 +74,8 @@
 
 	* Wrote new configure.in, and use automake to generate makefiles.
 
+	* Renamed UV to projUV to avoid conflicts on windows.
+	
 	* Reorganize ChangeLog, and start work on 4.4.
 
 Rel. 4.3.2 94/10/30 Base-line
