@@ -1,3 +1,105 @@
+Rel. 4.4.3 2001/04/20
+-------------------------------------------------------------------------
+	
+2001-04-20  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Don't install test files in /usr/local/share/proj.
+
+	* Made WGS84 the default in proj_def.dat
+
+	* nad/test27,test83: Use -b flag for diff to avoid differences on
+	Windows due to CR/LF issues.
+
+	* src/makefile.vc: default to building "all".
+
+	* src/pj_init.c: call pj_open_lib() with mode of "rt" to ensure
+	correct handling of def files on DOS based systems.
+
+	* Updated for 4.4.3 release (pj_release.c, Makefile.am, etc).
+
+2001-04-05  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Introduce proj_api.h as a public include file with projects.h
+	now intended to be private.
+
+	* pj_datums.c: added ntv1_can.dat to list for NAD27 datum.
+
+	* nad_init(): added support for loading NTv1 style datum shift files.
+
+	* cs2cs.c: use pj_latlong_from_proj()
+
+	* pj_init.c: added pj_init_plus().
+
+	* pj_utils.c: new with pj_is_latlong(), and pj_latlong_from_proj()
+	functions.
+
+	* pj_strerror.c: added error -43.
+
+2001-04-04  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* rewrote 7 param datum shift to match EPSG:9606, now works with 
+	example.
+
+2001-03-20  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Added -DPROJ_LIB=\"C:/PROJ/\" in src/makefile.vc to provide for
+	a default proj data file search directory.
+
+	* Added HOWTO-RELEASE document in CVS.
+
+2001-03-15  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/pj_apply_gridshift.c: fixed bug in pj_load_nadgrids() which
+	would sometimes result in the load function failing because of a
+	buffer overrun in the grid list string.
+
+2001-03-14  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* added nad/epsg database of translations between EPSG PCS/GCS
+	codes and PROJ.4 definitions.
+
+2001-02-24  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Include +ellps in proj example as per suggestion from Michael
+	DeChaine.
+
+2001-02-07  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Cleaned up various warnings when compiled with -Wall.
+
+2001-02-03  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Added cs2cs.1 man page, and minor updates to nad2nad.1 and proj.1.
+
+	* Added pj_transform docs to pj_init.3.
+
+2001-01-25  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Fixed pj_init() check for WGS84 match as per Bart Adriaanse bug rep.
+
+2000-12-15  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/makefile.vc: only delete proj.lib if it exists.
+
+2000-12-01  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Added proj.def to extra_dist in src/Makefile.am.
+
+2000-11-29  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Changed strtod() to proj_strtod() in strtod.c, and make use
+	of it in dmstor() to avoid having stuff like "5d10" interpreted
+	as exponential notation on MSVC.
+
+2000-11-18  Frank Warmerdam  <warmerda@cs46980-c>
+
+	* Patch from Craig Bruce to adjlon.c to avoid wrong results, 
+	and near-hangs when adjusting very large numbers. 
+	http://bugzilla.remotesensing.org/show_bug.cgi?id=27
+
+Rel. 4.4.2 2000/09/22
+-------------------------------------------------------------------------
+	
 2000-09-22  Frank Warmerdam  <warmerda@cs46980-c>
 
 	* Fixed src/Makefile.am install-exec-local target, and added
@@ -54,6 +156,9 @@
 	* Added hard links for invproj->proj and invgeod->geod in 
 	src/Makefile.{am,in}.
 
+Rel. 4.4.1 2000/03/27
+-------------------------------------------------------------------------
+	
 2000-03-27  Frank Warmerdam  <warmerda@cs46980-c>
 
 	* Issued V4.4.1 Release.
