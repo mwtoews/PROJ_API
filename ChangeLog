@@ -1,3 +1,64 @@
+2003-03-31  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Prepare 4.4.7 Release.
+
+	* nad/esri: incorporated Paul Ramsey's update.  ESRI specific 
+	coordinate systems in nad/esri.extra.
+
+	* nad/epsg: Regenerated with towgs84 parameters properly generated
+	for non-greenwich prime meridians. 
+
+	http://bugzilla.remotesensing.org/show_bug.cgi?id=304
+
+2003-03-28  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* config.guess, config.sub: updated from 
+	ftp://ftp.gnu.org/pub/gnu/config/ in order to resolve Debian build
+	problems on MIPS architecture. 
+	
+	http://bugs.debian.org/cgi-bin/bugreport.cgi?archive=no&bug=186586
+
+	* src/pj_datums.c: fixed ire65 definition to refer to mod_airy, not
+	modif_airy as per:
+	http://bugzilla.remotesensing.org/show_bug.cgi?id=312
+
+2003-03-26  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/pj_transform.c: Added check that srcdefn->inv actually exists!
+
+	Per http://mapserver.gis.umn.edu/bugs/show_bug.cgi?id=301
+
+2003-03-25  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/cs2cs.c: modified so that -f formats are used for Z as well as
+	x and y values.  
+	As per http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=169056
+
+	* src/man/man1/cs2cs.1: removed -V flag ... it is not supported.
+	As per http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=162331
+
+2003-03-17  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/pj_datums.c: changed NAD27 definition to make everything
+	optional, and to include alaska, and ntv2_0.gsb. 
+	
+	nadgrids=@conus,@alaska,@ntv2_0.gsb,@ntv1_can.dat
+
+	* src/pj_grid*, src/pj_apply_gridshift.c, src/nad_init.c: Lots of
+	changes introducing the PJ_GRIDINFO structure, support for skippable
+	grids ('@' prefix), delayed grid data loading and support for NTv2
+	grids. 
+
+2003-03-16  Frank Warmerdam  <warmerdam@pobox.com>
+
+	*  Modified get_opt() to terminate reading the definition when a new
+	definition (a word starting with '<') is encountered, in addition 
+	to when the definition terminator '<>' is encountered, so that 
+	unterminated definitions like those in the distributed esri file 
+	will work properly.  Patch provided by Carl Anderson.
+	
+	http://bugzilla.remotesensing.org/show_bug.cgi?id=302
+
 2003-03-03  Frank Warmerdam  <warmerdam@pobox.com>
 
 	* Prepare 4.4.6 Release.
