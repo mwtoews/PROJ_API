@@ -1,5 +1,5 @@
 /******************************************************************************
- * $Id: projects.h,v 1.17 2003/03/17 18:56:34 warmerda Exp $
+ * $Id: projects.h,v 1.24 2006/10/18 04:34:03 fwarmerdam Exp $
  *
  * Project:  PROJ.4
  * Purpose:  Primary (private) include file for PROJ.4 library.
@@ -28,6 +28,29 @@
  ******************************************************************************
  *
  * $Log: projects.h,v $
+ * Revision 1.24  2006/10/18 04:34:03  fwarmerdam
+ * added mlist functions from libproj4
+ *
+ * Revision 1.23  2006/10/12 21:04:39  fwarmerdam
+ * Added experimental +lon_wrap argument to set a "center point" for
+ * longitude wrapping of longitude values coming out of pj_transform().
+ *
+ * Revision 1.22  2006/03/30 14:35:09  fwarmerdam
+ * bug 1145: avoid warnings on VC8.
+ *
+ * Revision 1.21  2004/10/28 16:08:13  fwarmerdam
+ * added pj_get_*_ref() accessors
+ *
+ * Revision 1.20  2004/10/20 17:04:29  fwarmerdam
+ * added geos, sterea and supporting gauss code from libproj4
+ *
+ * Revision 1.19  2004/08/31 22:57:11  warmerda
+ * Don't re-declare hypot() on win32 as it will conflict with math.h as per
+ * http://bugzilla.remotesensing.org/show_bug.cgi?id=495
+ *
+ * Revision 1.18  2004/04/15 13:56:45  warmerda
+ * changed PJD_ERR_GEOCENTRIC to -45
+ *
  * Revision 1.17  2003/03/17 18:56:34  warmerda
  * implement heirarchical NTv2 gridinfos
  *
@@ -73,6 +96,15 @@
 #ifndef PROJECTS_H
 #define PROJECTS_H
 
+#ifdef _MSC_VER
+#  ifndef _CRT_SECURE_NO_DEPRECATE
+#    define _CRT_SECURE_NO_DEPRECATE
+#  endif
+#  ifndef _CRT_NONSTDC_NO_DEPRECATE
+#    define _CRT_NONSTDC_NO_DEPRECATE
+#  endif
+#endif
+
 /* standard inclusions */
 #include <math.h>
 #include <stdio.h>
@@ -113,7 +145,10 @@ extern "C" {
 #define MAX_PATH_FILENAME 1024
 #endif
 	/* prototype hypot for systems where absent */
+#ifndef _WIN32
 extern double hypot(double, double);
+#endif
+
 	/* some useful constants */
 #define HALFPI		1.5707963267948966
 #define FORTPI		0.78539816339744833
@@ -144,7 +179,7 @@ extern double hypot(double, double);
 #define PJD_WGS84     4   /* WGS84 (or anything considered equivelent) */
 
 /* datum system errors */
-#define PJD_ERR_GEOCENTRIC 100
+#define PJD_ERR_GEOCENTRIC -45
 
 #define USE_PROJUV 
 
@@ -243,6 +278,7 @@ typedef struct PJconsts {
         int     datum_type; /* PJD_UNKNOWN/3PARAM/7PARAM/GRIDSHIFT/WGS84 */
         double  datum_params[7];
         double  from_greenwich; /* prime meridian offset (in radians) */
+        double  long_wrap_center; /* 0.0 for -180 to 180, actually in radians*/
         
 #ifdef PROJ_PARMS__
 PROJ_PARMS__
@@ -407,8 +443,21 @@ PJ_GRIDINFO *pj_gridinfo_init( const char * );
 int pj_gridinfo_load( PJ_GRIDINFO * );
 void pj_gridinfo_free( PJ_GRIDINFO * );
 
+void *proj_mdist_ini(double);
+double proj_mdist(double, double, double, const void *);
+double proj_inv_mdist(double, const void *);
+void *pj_gauss_ini(double, double, double *,double *);
+LP pj_gauss(LP, const void *);
+LP pj_inv_gauss(LP, const void *);
+
 extern char const pj_release[];
 
+struct PJ_ELLPS *pj_get_ellps_ref( void );
+struct PJ_DATUMS *pj_get_datums_ref( void );
+struct PJ_UNITS *pj_get_units_ref( void );
+struct PJ_LIST  *pj_get_list_ref( void );
+struct PJ_PRIME_MERIDIANS  *pj_get_prime_meridians_ref( void );
+ 
 #ifndef DISABLE_CVSID
 #  define PJ_CVSID(string)     static char pj_cvsid[] = string; \
 static char *cvsid_aw() { return( cvsid_aw() ? ((char *) NULL) : pj_cvsid ); }
