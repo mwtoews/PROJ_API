@@ -1,3 +1,78 @@
+2008-08-21  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Prepare 4.6.1RC2 
+
+	* nad/td_out.dist: backed out erroneous changes in 4.6.0 that lost 
+	datum shifts with grid shift files.  Added stere (#12) test. 
+
+	* nmake.opt: Added /Op to avoid stere errors per ticket #12.
+
+2008-08-07  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* nmake.opt, nad/makefile.vc: Make sure we use PROJ_LIB_DIR when
+	installing nad directory support files on windows.
+
+2008-07-28 IGNF <didier.richard@ign.fr>
+
+	* PJ_glabsgm.c : refactoring for better understanding of the projection's
+	formula.
+	* copy of PJ_glabsgm.c to PJ_gstmerc.c and make changes accordingly in src
+	and nad directories.
+
+2008-07-21  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* Prepare 4.6.1 release.
+
+	* rename INSTALL.TXT to INSTALL since the damn distribution generator
+	won't stand for the alternate naming.  Change makefile.vc to use 
+	install-all target instead of install.  What are the chances anyone 
+	will think of trying that?  Not high.
+
+	* nad/epsg: regenerated from EPSG 6.17.  This should also correct the
+	odd precision problems in the last version or two caused by GDAL 
+	numeric processing issues.
+
+2008-06-17  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/PJ_tmerc.c: Ensure that tmerc forward projection inputs are
+	within 90 degrees of the central meridian.  This should be considered
+	a preliminary patch until such time as Gerald comes up with a better
+	solution.  http://trac.osgeo.org/proj/ticket/5
+
+2008-04-24  Frank Warmerdam  <warmerdam@pobox.com>
+
+	* src/cs2cs.c: Fix process() so it passes through extra text as the
+	docs claim.
+
+2008-03-15  Frank Warmerdam <warmerdam@pobox.com>
+
+	* rename INSTALL to INSTALL.TXT to avoid screwing up "make install"
+	* Rework win32 makefiles to support "make install", and better 
+	knowledge of grid shift files, 
+
+2008-01-18  IGNF  <didier.richard@ign.fr>
+
+	* PJ_eqc.c : Merged eqr and eqc after advise from Gerald. eqc is
+	now generalized (supports latitude of origin). Cleaned files
+	including eqr.
+	* IGNF catalogue : changed accordingly. Added proj_outIGN.dist-real
+	in nad directory to get real coordinates for unit tests.
+
+2008-01-05  IGNF  <didier.richard@ign.fr>
+
+	* PJ_eqr.c: src/PJ_eqr.c added. src/pj_list.h modified (added eqr).
+	src/Makefile.am, src/makefile.vc modified (added PJ_eqr.c and al).
+	As automake 1.10 is missing, src/Makefile.in modified by hand.
+	* PJ_glabsgm.c: src/PJ_glabsgm.c added. src/pj_list.h modified (added glabsgm).
+	src/Makefile.am, src/makefile.vc modified (added PJ_glabgsm.c and al).
+	As automake 1.10 is missing, src/Makefile.in modified by hand.
+	* IGNF catalogue: nad/IGNF added. nad/ntf_r93.gsb added, nad/Makefile.am
+	modified (added IGNF, ntf_r93.gsb little endian release)
+	nad/README modified (added IGNF, ntf_r93.gsb).
+	As automake 1.10 is missing, nad/Makefile.in modified by hand.
+	* Specific IGN release : configure.in
+	ChangeLog
+
 2007-12-21  Frank Warmerdam  <warmerdam@pobox.com>
 
 	* Prepare 4.6.0 final release.

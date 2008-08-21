@@ -1,5 +1,5 @@
 /******************************************************************************
- * $Id: proj_api.h,v 1.16 2007/11/29 21:07:49 fwarmerdam Exp $
+ * $Id: proj_api.h,v 1.17 2008/07/21 20:47:09 fwarmerdam Exp $
  *
  * Project:  PROJ.4
  * Purpose:  Public (application) include file for PROJ.4 API, and constants.
@@ -28,6 +28,9 @@
  ******************************************************************************
  *
  * $Log: proj_api.h,v $
+ * Revision 1.17  2008/07/21 20:47:09  fwarmerdam
+ * prepare 4.6.1 release
+ *
  * Revision 1.16  2007/11/29 21:07:49  fwarmerdam
  * prepare for 4.6.0 release
  *
@@ -92,7 +95,7 @@ extern "C" {
 #endif
 
 /* Try to update this every version! */
-#define PJ_VERSION 460
+#define PJ_VERSION 461
 
 extern char const pj_release[]; /* global release id string */
 
