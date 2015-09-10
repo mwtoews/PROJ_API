@@ -1,6 +1,4 @@
 /******************************************************************************
- * $Id: proj_api.h 2610 2015-02-17 21:52:14Z hobu $
- *
  * Project:  PROJ.4
  * Purpose:  Public (application) include file for PROJ.4 API, and constants.
  * Author:   Frank Warmerdam, <warmerdam@pobox.com>
@@ -40,7 +38,11 @@ extern "C" {
 #endif
 
 /* Try to update this every version! */
-#define PJ_VERSION 491
+#define PJ_VERSION 492
+
+/* pj_init() and similar functions can be used with a non-C locale */
+/* Can be detected too at runtime if the symbol pj_atof exists */
+#define PJ_LOCALE_SAFE 1
 
 extern char const pj_release[]; /* global release id string */
 
@@ -89,7 +91,7 @@ int pj_geodetic_to_geocentric( double a, double es,
                                long point_count, int point_offset,
                                double *x, double *y, double *z );
 int pj_compare_datums( projPJ srcdefn, projPJ dstdefn );
-int pj_apply_gridshift( projCtx, const char *, int, 
+int pj_apply_gridshift( projCtx, const char *, int,
                         long point_count, int point_offset,
                         double *x, double *y, double *z );
 void pj_deallocate_grids(void);

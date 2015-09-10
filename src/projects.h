@@ -1,6 +1,4 @@
 /******************************************************************************
- * $Id: projects.h 2356 2013-06-25 01:02:23Z warmerdam $
- *
  * Project:  PROJ.4
  * Purpose:  Primary (private) include file for PROJ.4 library.
  * Author:   Gerald Evenden
@@ -158,7 +156,7 @@ typedef struct { double x, y; }     XY;
 typedef struct { double lam, phi; } LP;
 #endif
 
-typedef union { double  f; int  i; char *s; } PVALUE;
+typedef union { double  f; int  i; char *s; } PROJVALUE;
 struct PJconsts;
     
 struct PJ_LIST {
@@ -397,7 +395,7 @@ void set_rtodms(int, int);
 char *rtodms(char *, double, int, int);
 double adjlon(double);
 double aacos(projCtx,double), aasin(projCtx,double), asqrt(double), aatan2(double, double);
-PVALUE pj_param(projCtx ctx, paralist *, const char *);
+PROJVALUE pj_param(projCtx ctx, paralist *, const char *);
 paralist *pj_mkparam(char *);
 int pj_ell_set(projCtx ctx, paralist *, double *, double *);
 int pj_datum_set(projCtx,paralist *, PJ *);
@@ -511,17 +509,9 @@ struct PJ_DATUMS *pj_get_datums_ref( void );
 struct PJ_UNITS *pj_get_units_ref( void );
 struct PJ_LIST  *pj_get_list_ref( void );
 struct PJ_PRIME_MERIDIANS  *pj_get_prime_meridians_ref( void );
- 
-#ifndef DISABLE_CVSID
-#  if defined(__GNUC__) && __GNUC__ >= 4
-#    define PJ_CVSID(string)     static char pj_cvsid[] __attribute__((used)) = string;
-#  else
-#    define PJ_CVSID(string)     static char pj_cvsid[] = string; \
-static char *cvsid_aw() { return( cvsid_aw() ? ((char *) NULL) : pj_cvsid ); }
-#  endif
-#else
-#  define PJ_CVSID(string)
-#endif
+
+double pj_atof( const char* nptr );
+double pj_strtod( const char *nptr, char **endptr );
 
 #ifdef __cplusplus
 }
