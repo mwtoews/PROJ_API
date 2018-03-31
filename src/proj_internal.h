@@ -33,7 +33,7 @@
 #endif
 #include <math.h>   /* For M_PI */
 
-#include <proj.h>
+#include "proj.h"
 
 #ifdef PROJECTS_H
 #error proj_internal.h must be included before projects.h
@@ -73,8 +73,6 @@ enum pj_io_units {
 enum pj_io_units pj_left (PJ *P);
 enum pj_io_units pj_right (PJ *P);
 
-PJ_COORD   proj_trans   (PJ *P, PJ_DIRECTION direction, PJ_COORD obs);
-
 PJ_COORD proj_coord_error (void);
 
 void proj_context_errno_set (PJ_CONTEXT *ctx, int err);
@@ -113,7 +111,7 @@ typedef void (*PJ_LOG_FUNCTION)(void *, int, const char *);
 void proj_log_error (PJ *P, const char *fmt, ...);
 void proj_log_debug (PJ *P, const char *fmt, ...);
 void proj_log_trace (PJ *P, const char *fmt, ...);
-void proj_log_func (PJ_CONTEXT *ctx, void *app_data, PJ_LOG_FUNCTION log);
+void proj_log_func (PJ_CONTEXT *ctx, void *app_data, PJ_LOG_FUNCTION logf);
 
 int pj_ellipsoid (PJ *);
 void pj_inherit_ellipsoid_def (const PJ *src, PJ *dst);
