@@ -92,11 +92,6 @@ typedef long pj_int32;
 #define MAX_PATH_FILENAME 1024
 #endif
 
-/* prototype hypot for systems where absent */
-#if !(defined(HAVE_C99_MATH) && HAVE_C99_MATH)
-extern double hypot(double, double);
-#endif
-
 /* If we still haven't got M_PI*, we rely on our own defines.
  * For example, this is necessary when compiling with gcc and
  * the -ansi flag.
@@ -535,7 +530,8 @@ enum deprecated_constants_for_now_dropped_analytical_factors {
 #define PJD_ERR_PROJ_NOT_NAMED           -4
 #define PJD_ERR_UNKNOWN_PROJECTION_ID    -5
 #define PJD_ERR_ECCENTRICITY_IS_ONE      -6
-#define PJD_ERR_UNKNOW_UNIT_ID           -7
+#define PJD_ERR_UNKNOW_UNIT_ID           -7  /* deprecated: typo */
+#define PJD_ERR_UNKNOWN_UNIT_ID          -7
 #define PJD_ERR_INVALID_BOOLEAN_PARAM    -8
 #define PJD_ERR_UNKNOWN_ELLP_PARAM       -9
 #define PJD_ERR_REV_FLATTENING_IS_ZERO  -10

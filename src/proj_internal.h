@@ -31,7 +31,9 @@
 #define _USE_MATH_DEFINES
 #endif
 #endif
+
 #include <math.h>   /* For M_PI */
+#include <stddef.h>
 
 #include "proj.h"
 
@@ -49,6 +51,10 @@ extern "C" {
 #endif
 
 #define STATIC_ASSERT(COND) ((void)sizeof(char[(COND) ? 1 : -1]))
+
+#if !defined(HAVE_C99_MATH)
+#define HAVE_C99_MATH 0
+#endif
 
 #ifndef PJ_TODEG
 #define PJ_TODEG(rad)  ((rad)*180.0/M_PI)
@@ -93,25 +99,9 @@ double          proj_vgrid_value(PJ *P, PJ_LP lp);
 PJ_LP           proj_hgrid_value(PJ *P, PJ_LP lp);
 PJ_LP           proj_hgrid_apply(PJ *P, PJ_LP lp, PJ_DIRECTION direction);
 
-/* High level functionality for handling thread contexts */
-enum proj_log_level {
-    PJ_LOG_NONE  = 0,
-    PJ_LOG_ERROR = 1,
-    PJ_LOG_DEBUG = 2,
-    PJ_LOG_TRACE = 3,
-    PJ_LOG_TELL  = 4,
-    PJ_LOG_DEBUG_MAJOR = 2, /* for proj_api.h compatibility */
-    PJ_LOG_DEBUG_MINOR = 3  /* for proj_api.h compatibility */
-};
-
-/* Set logging level 0-3. Higher number means more debug info. 0 turns it off */
-enum proj_log_level proj_log_level (PJ_CONTEXT *ctx, enum proj_log_level log_level);
-typedef void (*PJ_LOG_FUNCTION)(void *, int, const char *);
-
 void proj_log_error (PJ *P, const char *fmt, ...);
 void proj_log_debug (PJ *P, const char *fmt, ...);
 void proj_log_trace (PJ *P, const char *fmt, ...);
-void proj_log_func (PJ_CONTEXT *ctx, void *app_data, PJ_LOG_FUNCTION logf);
 
 int pj_ellipsoid (PJ *);
 void pj_inherit_ellipsoid_def (const PJ *src, PJ *dst);
