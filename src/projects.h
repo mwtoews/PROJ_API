@@ -458,7 +458,13 @@ struct PJconsts {
 struct ARG_list {
     paralist *next;
     char used;
-    char param[1];
+#if defined(__GNUC__) && __GNUC__ >= 8
+    char param[]; /* variable-length member */
+    /* Safer to use [] for gcc 8. See https://github.com/OSGeo/proj.4/pull/1087 */
+    /* and https://gcc.gnu.org/bugzilla/show_bug.cgi?id=86914 */
+#else
+    char param[1]; /* variable-length member */
+#endif
 };
 
 
@@ -583,6 +589,9 @@ enum deprecated_constants_for_now_dropped_analytical_factors {
 #define PJD_ERR_ELLIPSOIDAL_UNSUPPORTED -56
 #define PJD_ERR_TOO_MANY_INITS          -57
 #define PJD_ERR_INVALID_ARG             -58
+#define PJD_ERR_INCONSISTENT_UNIT       -59
+/* NOTE: Remember to update pj_strerrno.c and transient_error in */
+/* pj_transform.c when adding new value */
 
 struct projFileAPI_t;
 
@@ -684,7 +693,7 @@ typedef struct _pj_gi {
     const char *format; /* format of this grid, ie "ctable", "ntv1",
                            "ntv2" or "missing". */
 
-    int   grid_offset;  /* offset in file, for delayed loading */
+    long   grid_offset;  /* offset in file, for delayed loading */
     int   must_swap;    /* only for NTv2 */
 
     struct CTABLE *ct;
