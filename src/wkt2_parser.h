@@ -1,10 +1,10 @@
 /******************************************************************************
  * Project:  PROJ
- * Purpose:  Make C99 math functions available on C89 systems
- * Author:   Kristian Evers
+ * Purpose:  WKT2 parser grammar
+ * Author:   Even Rouault, <even.rouault at spatialys.com>
  *
  ******************************************************************************
- * Copyright (c) 2018, Kristian Evers
+ * Copyright (c) 2018 Even Rouault, <even.rouault at spatialys.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -23,68 +23,32 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
- *****************************************************************************/
+ ****************************************************************************/
 
-#ifndef PROJ_MATH_H
-#define PROJ_MATH_H
+#ifndef PJ_WKT2_PARSER_H_INCLUDED
+#define PJ_WKT2_PARSER_H_INCLUDED
 
-#include <math.h>
-#include <limits.h>
+#ifndef DOXYGEN_SKIP
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#if !(defined(HAVE_C99_MATH) && HAVE_C99_MATH)
+typedef struct pj_wkt2_parse_context pj_wkt2_parse_context;
 
-#ifndef PROJ_DLL
-#ifdef PROJ_MSVC_DLL_EXPORT
-#define PROJ_DLL __declspec(dllexport)
-#elif defined(PROJ_MSVC_DLL_IMPORT)
-#define PROJ_DLL __declspec(dllimport)
-#elif defined(__GNUC__)
-#define PROJ_DLL __attribute__ ((visibility("default")))
-#else
-#define PROJ_DLL
-#endif
-#endif
+#include "wkt2_generated_parser.h"
 
-#ifdef PROJ_RENAME_SYMBOLS
-#include "proj_symbol_rename.h"
-#endif
-
-#ifndef NAN
-#ifdef _WIN32
-#define NAN sqrt(-1.0)
-#else
-#define NAN 0.0/0.0
-#endif
-#endif
-
-double  pj_hypot(double x, double y);
-double  pj_log1p(double x);
-double  pj_asinh(double x);
-double  pj_round(double x);
-long    pj_lround(double x);
-int     PROJ_DLL pj_isnan(double x);
-
-#define hypot   pj_hypot
-#define log1p   pj_log1p
-#define asinh   pj_asinh
-#define round   pj_round
-#define lround  pj_lround
-
-
-#ifdef isnan
-#undef isnan
-#endif
-
-#define isnan   pj_isnan
-
-#endif /* !(defined(HAVE_C99_MATH) && HAVE_C99_MATH) */
+void pj_wkt2_error( pj_wkt2_parse_context *context, const char *msg );
+int pj_wkt2_lex(YYSTYPE* pNode, pj_wkt2_parse_context *context);
+int pj_wkt2_parse(pj_wkt2_parse_context *context);
 
 #ifdef __cplusplus
 }
+
+std::string pj_wkt2_parse(const std::string& wkt);
+
 #endif
 
-#endif /* PROJ_MATH_H */
+#endif /* #ifndef DOXYGEN_SKIP */
+
+#endif /*  PJ_WKT2_PARSER_H_INCLUDED */
