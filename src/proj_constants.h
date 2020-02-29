@@ -75,6 +75,8 @@
 #define EPSG_NAME_METHOD_BONNE "Bonne"
 #define EPSG_CODE_METHOD_BONNE 9827
 
+#define PROJ_WKT2_NAME_METHOD_COMPACT_MILLER "Compact Miller"
+
 #define EPSG_NAME_METHOD_LAMBERT_CYLINDRICAL_EQUAL_AREA_SPHERICAL \
     "Lambert Cylindrical Equal Area (Spherical)"
 #define EPSG_CODE_METHOD_LAMBERT_CYLINDRICAL_EQUAL_AREA_SPHERICAL 9834
@@ -167,11 +169,16 @@
 
 #define PROJ_WKT2_NAME_METHOD_MOLLWEIDE "Mollweide"
 
+#define PROJ_WKT2_NAME_METHOD_NATURAL_EARTH "Natural Earth"
+#define PROJ_WKT2_NAME_METHOD_NATURAL_EARTH_II "Natural Earth II"
+
 #define  EPSG_NAME_METHOD_OBLIQUE_STEREOGRAPHIC "Oblique Stereographic"
 #define EPSG_CODE_METHOD_OBLIQUE_STEREOGRAPHIC 9809
 
 #define EPSG_NAME_METHOD_ORTHOGRAPHIC "Orthographic"
 #define EPSG_CODE_METHOD_ORTHOGRAPHIC 9840
+
+#define PROJ_WKT2_NAME_METHOD_PATTERSON "Patterson"
 
 #define EPSG_NAME_METHOD_AMERICAN_POLYCONIC "American Polyconic"
 #define EPSG_CODE_METHOD_AMERICAN_POLYCONIC 9818
@@ -189,6 +196,8 @@
 #define PROJ_WKT2_NAME_METHOD_SINUSOIDAL "Sinusoidal"
 
 #define PROJ_WKT2_NAME_METHOD_STEREOGRAPHIC "Stereographic"
+
+#define PROJ_WKT2_NAME_METHOD_TIMES "Times"
 
 #define PROJ_WKT2_NAME_METHOD_VAN_DER_GRINTEN "Van Der Grinten"
 
@@ -501,12 +510,22 @@
     "Geoid (height correction) model file"
 #define EPSG_CODE_PARAMETER_GEOID_CORRECTION_FILENAME 8666
 
+#define EPSG_NAME_METHOD_GEOCENTRIC_TRANSLATION_BY_GRID_INTERPOLATION_IGN \
+    "Geocentric translation by Grid Interpolation (IGN)"
+#define EPSG_CODE_METHOD_GEOCENTRIC_TRANSLATION_BY_GRID_INTERPOLATION_IGN 1087
+
+#define EPSG_CODE_PARAMETER_GEOCENTRIC_TRANSLATION_FILE 8727
+#define EPSG_NAME_PARAMETER_GEOCENTRIC_TRANSLATION_FILE \
+    "Geocentric translation file"
+
 /* ------------------------------------------------------------------------ */
 
 #define PROJ_WKT2_NAME_METHOD_HEIGHT_TO_GEOG3D \
     "GravityRelatedHeight to Geographic3D"
 
 #define PROJ_WKT2_NAME_METHOD_CTABLE2 "CTABLE2"
+
+#define PROJ_WKT2_NAME_METHOD_HORIZONTAL_SHIFT_GTIFF "HORIZONTAL_SHIFT_GTIFF"
 
 /* ------------------------------------------------------------------------ */
 
