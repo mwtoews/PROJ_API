@@ -735,6 +735,7 @@ struct projCtx_t {
     projGridChunkCache gridChunkCache{};
 
     int projStringParserCreateFromPROJStringRecursionCounter = 0; // to avoid potential infinite recursion in PROJStringParser::createFromPROJString()
+    int pipelineInitRecursiongCounter = 0; // to avoid potential infinite recursion in pipeline.cpp
 
     projCtx_t() = default;
     projCtx_t(const projCtx_t&);
@@ -872,6 +873,9 @@ std::string PROJ_DLL pj_context_get_grid_cache_filename(PJ_CONTEXT *ctx);
 std::string PROJ_DLL pj_context_get_user_writable_directory(PJ_CONTEXT *ctx, bool create);
 void PROJ_DLL pj_context_set_user_writable_directory(PJ_CONTEXT* ctx, const std::string& path);
 std::string PROJ_DLL pj_get_relative_share_proj(PJ_CONTEXT *ctx);
+
+void pj_clear_hgridshift_knowngrids_cache();
+void pj_clear_vgridshift_knowngrids_cache();
 
 /* classic public API */
 #include "proj_api.h"
